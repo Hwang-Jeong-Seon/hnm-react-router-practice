@@ -3,7 +3,7 @@ function getProducts(searchQuery){
         let url = `http://localhost:3030/products?q=${searchQuery}`
         let res = await fetch(url)
         let data = await res.json()
-        console.log(data)
+        dispatch({type: 'GET_PRODUCT_SUCCESS', payload:{data}})
     }
 }
 

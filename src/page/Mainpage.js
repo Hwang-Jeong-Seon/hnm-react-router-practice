@@ -6,10 +6,10 @@ import {Container, Row, Col} from "react-bootstrap";
 import {useSearchParams} from "react-router-dom";
 
 import {productAction} from '../redux/actions/productAction'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 const Mainpage = () => {
-    const [productList, setProductList] = useState([])
+   const productList = useSelector(state=> state.productList);
     let [query, setQuery] = useSearchParams()
 
     const dispatch = useDispatch()
