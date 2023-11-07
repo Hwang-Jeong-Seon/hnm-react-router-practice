@@ -1,5 +1,5 @@
 import React from "react";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 import ProductCard from "../component/ProductCard";
 import {Container, Row, Col} from "react-bootstrap";
