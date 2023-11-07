@@ -2,9 +2,12 @@ import React from "react";
 import styled from "styled-components";
 
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {loginAction} from "../redux/actions/loginAction";
+import {useState} from "react";
 
 const Loginpage = ({setAuthenticate}) => {
-    const LoginWrap = styled.div`
+    const LoginWrap = styled.form`
       padding : 3rem;
       width : 500px;
       display: flex;
@@ -32,19 +35,34 @@ const Loginpage = ({setAuthenticate}) => {
     `
 
     const nav = useNavigate()
-    const login = () => {
+    const dispatch = useDispatch();
+
+    const [id, setId] = useState('');
+    const [pwd, setPwd] = useState('');
+
+    const login = (event) => {
+        event.preventDefault();
         console.log('로그인해주라ㅣ!!')
-        setAuthenticate(true);
+        // setAuthenticate(true);
+        dispatch(loginAction.login(id, pwd))
         nav('/')
     }
 
     return (
-        <LoginWrap>
+        <LoginWrap onSubmit={(event)=> {login(event)}}>
             <Span>Email address</Span>
-            <Input type="email" required={true} placeholder='Enter Email'/>
+            <Input
+                type="text"
+                placeholder='Enter Email'
+                onChange={(event)=> setId(event.target.value)}
+            />
             <Span>Password</Span>
-            <Input type="password" required={true} placeholder='Password'/>
-            <Button onClick={()=> {login()}}>Login</Button>
+            <Input
+                type="password"
+                placeholder='Password'
+                onChange={(event)=> setPwd(event.target.value)}
+            />
+            <Button type='submit'>Login</Button>
         </LoginWrap>
     )
 }
